@@ -33,12 +33,16 @@ ingredient_list = st.multiselect(
     max_selections=5
 )
 
-ingredient_string='' 
 if ingredient_list:
-    # st.write(ingredient_list)
-    # st.text(ingredient_list)
-    # st.write(ingredient_string)
-    ingredient_string = " ".join(ingredient_list)
+    ingredients_string = ''
+
+    for fruit_choosen in ingredients_list:
+        ingredients_string += fruit_choosen + ' '
+        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+
+        
+
 
 
 order_insert_smt = """insert into smoothies.public.orders(ingredients,name_on_order) values('"""+ingredient_string+"""','"""+name_on_order+"""')"""
